@@ -28,7 +28,6 @@ public class PerformanceController {
 	    	System.out.println(">>>>> /performance/performanceList 요청 들어옴");
 	    	
 	        List<PerformanceVO> list = performanceService.fetchPerformances();
-	        System.out.println("🎯 Controller에서 받은 list 크기: " + list.size());
 	        model.addAttribute("performanceList", list);
 	        return "performance/performanceList";
 	    }

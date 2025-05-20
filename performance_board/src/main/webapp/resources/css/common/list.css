@@ -57,3 +57,9 @@
   margin-top: 40px;
   text-align: center;
 }
+
+/* footer 영역 띄우기 */
+#krds-footer {
+  margin-top: 40px;
+  padding-top: 10px;
+}

@@ -27,6 +27,7 @@
 </div>
 <!-- //검색창 -->
 
+<!-- 목록 -->
 <div class="krds-table-wrap" style="max-width: 1200px; margin: 50px auto 0 auto;">
 	<table class="tbl col data">
 		<colgroup>
@@ -61,6 +62,7 @@
 		</tbody>
 	</table>
 </div>
+<!-- //목록 -->
 
 <!-- 페이징 영역 -->
 <div class="krds-pagination">
@@ -80,3 +82,4 @@
   <a class="page-navi next" href="?pageNum=4">다음</a>
 </div>
 <!-- //페이징 영역-->
+<%@ include file="../includes/footer.jsp" %>

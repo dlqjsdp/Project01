@@ -60,10 +60,10 @@
 			<div class="tab line full">
 				<ul role="tablist">
 					<li id="tab_login_01" role="tab" aria-selected="true" aria-controls="panel_login_01" class="active">
-						<button type="button" class="btn-tab">공연/행사 정보<i class="sr-only created"> 선택됨</i></button>
+						<a href="${pageContext.request.contextPath}/performance/performanceList" class="btn-tab">공연/행사 정보</a>
 					</li>
 					<li id="tab_login_02" role="tab" aria-selected="false" aria-controls="panel_login_02">
-						<button type="button" class="btn-tab">관람평</button>
+						<a href="${pageContext.request.contextPath}/review/reviewList" class="btn-tab">관람평</a>
 					</li>
 				</ul>
 			</div>

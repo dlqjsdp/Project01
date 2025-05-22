@@ -2,6 +2,7 @@ package com.project.controller;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.domain.Criterial;
+import com.project.domain.Criteria;
 import com.project.domain.ReplyPageDTO;
 import com.project.domain.ReplyVO;
 import com.project.service.ReplyService;
@@ -55,7 +56,7 @@ public class ReplyController {
 			){
 		log.info("getList...");
 		
-		Criterial cri = new Criterial(page, 10);
+		Criteria cri = new Criteria(page, 10);
 		
 		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}

@@ -2,6 +2,7 @@ package com.project.mapper;
 
 import static org.junit.Assert.*;
 
+
 import java.util.stream.IntStream;
 
 import org.junit.Test;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.project.domain.Criterial;
+import com.project.domain.Criteria;
 import com.project.domain.ReplyVO;
 
 import lombok.extern.log4j.Log4j;
@@ -59,7 +60,7 @@ public class ReplyMapperTests {
 	
 	@Test
 	public void testGetList() {
-		Criterial cri = new Criterial();
+		Criteria cri = new Criteria();
 		Long bno = 2L;
 		
 		mapper.getListWithPaging(cri, bno)
@@ -68,7 +69,7 @@ public class ReplyMapperTests {
 	
 	@Test
 	public void testList2() {
-		Criterial cri = new Criterial(2,3);
+		Criteria cri = new Criteria(2,3);
 		
 		mapper.getListWithPaging(cri, 2L).forEach(list -> log.info(list));
 	}

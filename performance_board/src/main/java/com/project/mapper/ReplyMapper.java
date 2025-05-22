@@ -2,9 +2,10 @@ package com.project.mapper;
 
 import java.util.List;
 
+
 import org.apache.ibatis.annotations.Param;
 
-import com.project.domain.Criterial;
+import com.project.domain.Criteria;
 import com.project.domain.ReplyVO;
 
 public interface ReplyMapper {
@@ -18,7 +19,7 @@ public interface ReplyMapper {
 	public int update(ReplyVO vo);
 	
 	public List<ReplyVO> getListWithPaging(
-			@Param("cri") Criterial cri,
+			@Param("cri") Criteria cri,
 			@Param("bno") Long rno
 			);
 	

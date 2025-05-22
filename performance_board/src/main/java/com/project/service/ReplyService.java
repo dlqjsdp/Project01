@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.project.domain.ReplyPageDTO;
 
-import com.project.domain.Criterial;
+import com.project.domain.Criteria;
 import com.project.domain.ReplyVO;
 
 public interface ReplyService {
@@ -18,7 +18,7 @@ public interface ReplyService {
 	
 	public int remove(Long rno);
 	
-	public List<ReplyVO> getList(Criterial cri, Long bno);
+	public List<ReplyVO> getList(Criteria cri, Long bno);
 	
-	public ReplyPageDTO getListPage(Criterial cri, Long bno);
+	public ReplyPageDTO getListPage(Criteria cri, Long bno);
 }

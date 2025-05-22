@@ -326,7 +326,7 @@
 			
 			for(let i=startNum; i<=endNum; i++){
 				let active = pageNum == i ? "active" : "";
-				str += "<li clastt'page-item " + active +"'><a class='page-link' href='"+ i +"'>" + i + "</a></li>";
+				str += "<li class'page-item " + active +"'><a class='page-link' href='"+ i +"'>" + i + "</a></li>";
 			}
 			
 			if(next){

@@ -7,16 +7,16 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Criterial {
+public class Criteria {
 	
 	private int pageNum;
 	private int amount;
 	
-	public Criterial() {
+	public Criteria() {
 		this(1,10);
 	}
 	
-	public Criterial(int pageNum, int amount) {
+	public Criteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}

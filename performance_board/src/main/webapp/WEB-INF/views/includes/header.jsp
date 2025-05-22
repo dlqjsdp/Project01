@@ -14,9 +14,14 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/component/output.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/plugin/swiper-bundle.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/token/krds_tokens.css">
+	
+	
 
 	<script src="${pageContext.request.contextPath}/resources/js/component/ui-script.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/plugin/swiper-bundle.min.js"></script>
+	
+
+	
 </head>
 <style>
     .krds-tab-area.layer {

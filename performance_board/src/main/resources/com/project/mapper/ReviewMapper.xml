@@ -4,6 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mapper.ReviewMapper">
   
+  <select id="getListWithPage" resultType="com.project.domain.ReviewVO">
+  	<![CDATA[
+	  	select bno, img_url as img, title, writer, readcount, regdate, updatedate, content, replyCnt
+	  	from (
+	  		select /*+ index_desc(tbl_performance pk_performance) */
+	  		rownum rn, bno, img_url, title, writer, readcount, regdate, updatedate, content, replyCnt
+	  		from tbl_performance
+	  		where
+	]]>
+	
+	<include refid="criteria"></include>
+	
+	<![CDATA[
+	  		rownum <= #{pageNum}*#{amount}
+		 	)
+		  	where rn > (#{pageNum}-1) * #{amount}
+  	]]>
+	
+  </select>
+  
   <select id="read" resultType="com.project.domain.ReviewVO">
   	select bno, img_url as img, title, writer, readcount, regdate, updatedate, content
   	from tbl_performance
@@ -41,5 +61,23 @@
   <update id="updateReplyCnt">
   	update tbl_performance set replyCnt = replyCnt + #{amount} where bno = #{bno}
   </update>
+  
+  <sql id="criteria">
+  	<trim suffix="and">
+		<foreach collection="typeArr" item="type" separator="or" open="(" close=")">
+	  		<if test="type=='T'.toString()">
+	  			title like '%'|| #{keyword} || '%'
+	  		</if>
+	  		
+	  		<if test="type=='C'.toString()">
+	  			content like '%'|| #{keyword} || '%'
+	  		</if>
+	  		
+	  		<if test="type=='W'.toString()">
+	  			writer like '%'|| #{keyword} || '%'
+	  		</if>
+  		</foreach>
+ 	</trim>
+  </sql>
   
 </mapper>

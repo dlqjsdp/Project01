@@ -2,12 +2,15 @@ package com.project.mapper;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.project.domain.Criteria;
 import com.project.domain.ReviewVO;
 
 import lombok.extern.log4j.Log4j;
@@ -19,6 +22,13 @@ public class ReviewMapperTests {
 	
 	@Autowired
 	private ReviewMapper mapper;
+	
+	@Test
+	public void testgetListWithPage() {
+		List<ReviewVO> list = mapper.getListWithPage(new Criteria(1, 10));
+		
+		list.forEach(review -> log.info(review));
+	}
 	
 	@Test
 	public void testRead() {

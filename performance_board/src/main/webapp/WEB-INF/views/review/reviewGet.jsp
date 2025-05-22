@@ -76,18 +76,23 @@
                 </tr>
             </table>
         </div>
+        <!-- end reivewDetail-header -->
+        
         <div class="button-wrap">
-        <div class="button">
-            <button type="submit" data-oper="modify" class="btn btn-info">Modify</button>
-            <button type="submit" data-oper="remove" class="btn btn-danger">Remove</button>
-            <button type="submit" data-oper="list" class="btn btn-default">List</button>
+	        <div class="button">
+	            <button type="submit" data-oper="modify" class="btn btn-info">Modify</button>
+	            <button type="submit" data-oper="list" class="btn btn-default">List</button>
+	        </div>
         </div>
-        </div>
-        <!-- end button -->
+        <!-- end button-wrap -->
+        
+        <form id="openForm" action="/review/reviewModify" method="get">
+      		<input type="hidden" id="bno" name="bno" value="<c:out value='${performance.bno}'/>">
+      		<input type="hidden" name="pageNum" value="${cri.pageNum}">
+      		<input type="hidden" name="amount" value="${cri.amount}">
+      	</form>
     </div>
-    <!-- end reivewDetail-header -->
-</div>
-<!-- end contents -->
+	<!-- end contents -->
     
     <!-- .row 댓글 처리 -->
     <div class="reply-section">
@@ -152,7 +157,6 @@
       
       <!-- Modal footer -->
       <div class="modal-footer">
-     	<!-- data-dismiss="modal" : 창을 닫아주는 역할 -->
         <button id="modalRegisterBtn" type="button" class="btn btn-primary">Register</button>
         <button id="modalModBtn" type="button" class="btn btn-info">Modify</button>
         <button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
@@ -326,7 +330,7 @@
 			
 			for(let i=startNum; i<=endNum; i++){
 				let active = pageNum == i ? "active" : "";
-				str += "<li class'page-item " + active +"'><a class='page-link' href='"+ i +"'>" + i + "</a></li>";
+				str += "<li class='page-item " + active +"'><a class='page-link' href='"+ i +"'>" + i + "</a></li>";
 			}
 			
 			if(next){
@@ -353,6 +357,21 @@
 		
 		}); //end replyPageFooter
 		
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		let operForm = $("#openForm");
+		
+		$("button[data-oper='modify']").on("click", function(e){
+			operForm.attr("action", "/review/reviewModify").submit();
+		});
+		
+		$("button[data-oper='list']").on("click", function(e){
+			operForm.find("#bno").remove();
+			operForm.attr("action", "/review/reviewList").submit();
+		});
 	});
 </script>
 

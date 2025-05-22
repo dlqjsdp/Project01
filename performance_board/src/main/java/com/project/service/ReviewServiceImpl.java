@@ -1,7 +1,10 @@
 package com.project.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.project.domain.Criteria;
 import com.project.domain.ReviewVO;
 import com.project.mapper.ReviewMapper;
 
@@ -14,6 +17,12 @@ import lombok.extern.log4j.Log4j;
 public class ReviewServiceImpl implements ReviewService{
 	
 	private final ReviewMapper mapper;
+	
+	@Override
+	public List<ReviewVO> getList(Criteria cri) {
+		log.info("getList...");
+		return mapper.getListWithPage(cri);
+	}
 	
 	@Override
 	public ReviewVO get(Long bno) {
@@ -44,5 +53,5 @@ public class ReviewServiceImpl implements ReviewService{
 		log.info("updateReadCount...");
 		mapper.updateReadCount(bno);	
 	}
-	
+
 }

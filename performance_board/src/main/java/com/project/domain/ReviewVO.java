@@ -1,6 +1,9 @@
 package com.project.domain;
 
-import java.util.Date;
+import java.sql.Date;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,4 +25,5 @@ public class ReviewVO {
 	private Date regDate;
 	private Date updateDate;
 	private String content;
+	
 }

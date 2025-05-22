@@ -4,9 +4,16 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.project.domain.Criteria;
 import com.project.domain.ReviewVO;
 
 public interface ReviewMapper {
+	
+	//전체 데이터 조회
+	public List<ReviewVO> getListWithPage(Criteria cri);
+	
+	//전체 데이터 수
+	public int getTotoalCount(Criteria cri);
 	
 	//단건 조회
 	public ReviewVO read(Long bno);

@@ -3,7 +3,7 @@ package com.project.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-
+import com.project.domain.Criteria;
 import com.project.domain.ReviewVO;
 
 public interface ReviewMapper {
@@ -26,4 +26,12 @@ public interface ReviewMapper {
 	//replyCnt 값
 	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
 	
+	// 기본 목록
+	public List<ReviewVO> getList();
+	
+	// 페이징 목록
+	public List<ReviewVO> getListWithPaging(Criteria cri);
+	
+	// 총 개수
+	public int getTotalCount(Criteria cri);
 }

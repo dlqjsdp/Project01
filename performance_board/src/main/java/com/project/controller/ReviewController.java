@@ -46,6 +46,7 @@ public class ReviewController {
 		// 3. 모델에 목록 + 페이지 정보 담기
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("cri", cri);
 		
 		return "review/reviewList";
 	}

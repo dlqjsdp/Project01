@@ -46,7 +46,6 @@ public class ReviewController {
 		// 3. 모델에 목록 + 페이지 정보 담기
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		model.addAttribute("cri", cri);
 		
 		return "review/reviewList";
 	}
@@ -127,8 +126,6 @@ public class ReviewController {
 		
 		service.remove(bno);
 		
-		rttr.addFlashAttribute("result", "삭제 성공했습니다.");
-		
 		rttr.addAttribute("pageNum", cri.getPageNum());
 	    rttr.addAttribute("amount", cri.getAmount());
 	    rttr.addAttribute("type", cri.getType());
@@ -142,8 +139,6 @@ public class ReviewController {
 		log.info("modify...");
 		
 		service.modifiy(vo);
-		
-		rttr.addFlashAttribute("result", "수정 성공했습니다.");
 		
 		rttr.addAttribute("pageNum", cri.getPageNum());
 	    rttr.addAttribute("amount", cri.getAmount());

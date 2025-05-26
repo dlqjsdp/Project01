@@ -10,6 +10,10 @@ create table tbl_performance(
     regdate date default sysdate,       -- 작성일
     updatedate date default sysdate,     -- 수정일
     content varchar2(1000)
+    IMGKEY   VARCHAR2(100),
+    CATEGORY VARCHAR2(50),
+    PLACE    VARCHAR2(100)
+    replyCnt int default 0
 );
 
 alter table tbl_performance add CONSTRAINT pk_performance

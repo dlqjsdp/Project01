@@ -64,5 +64,15 @@ public class ReviewServiceImpl implements ReviewService{
 
 		return mapper.getTotalCount(cri);
 	}
+
+	@Override
+	public List<ReviewVO> getListByImgKey(Criteria cri, String imgKey) {
+	    return mapper.getListWithPagingByImgKey(cri, imgKey);
+	}
+
+	@Override
+	public int getTotalByImgKey(String imgKey) {
+	    return mapper.getTotalCountByImgKey(imgKey);
+	}
 	
 }

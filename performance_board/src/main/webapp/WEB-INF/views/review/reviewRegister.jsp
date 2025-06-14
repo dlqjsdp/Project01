@@ -12,6 +12,7 @@
 
 <body>																						<!-- 등록시 내용 체크 함수 호출 -->
 <form action="${pageContext.request.contextPath}/review/submitReview" method="post" onsubmit="return checkForm()">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <div class="contents">
         <nav aria-label="breadcrumb">
             <ul class="sopt_list breadcrumb">
@@ -47,7 +48,7 @@
 	                <tr>
 	                    <th>작성자</th>
 	                    <td>
-	                        <input class="form-control" name="writer" value="${writer != null ? writer : ''}" />
+	                        <input class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly">
 	                    </td>
 	                    <th>분류</th>
 	                    <td>

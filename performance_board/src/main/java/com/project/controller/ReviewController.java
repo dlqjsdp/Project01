@@ -1,11 +1,13 @@
 package com.project.controller;
 
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -33,21 +35,27 @@ public class ReviewController {
 	private final ReviewService service;
 	
 	@GetMapping("/reviewList")
-	public String list(Criteria cri, Model model) {
-		log.info("review list..." + cri);
-		log.info("pageNum: " + cri.getPageNum());
-		
-		// 1. 페이징 된 리뷰 목록 가져오기
-		List<ReviewVO> list = service.getList(cri);
-		
-		// 2. 전체 리뷰 수 가져오기
-		int total = service.getTotal(cri);
-		
-		// 3. 모델에 목록 + 페이지 정보 담기
-		model.addAttribute("list", list);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		
-		return "review/reviewList";
+	public String list(@RequestParam(required = false) String imgKey, Criteria cri, Model model) {
+	    log.info("review list..." + cri);
+	    log.info("imgKey: " + imgKey);
+
+	    List<ReviewVO> list;
+	    int total;
+
+	    if (imgKey != null && !imgKey.isEmpty()) {
+	        // imgKey 기준으로 필터링
+	        list = service.getListByImgKey(cri, imgKey);
+	        total = service.getTotalByImgKey(imgKey);
+	        model.addAttribute("imgKey", imgKey); // JSP에서 다시 전달할 때 필요
+	    } else {
+	        list = service.getList(cri);
+	        total = service.getTotal(cri);
+	    }
+
+	    model.addAttribute("list", list);
+	    model.addAttribute("pageMaker", new PageDTO(cri, total));
+
+	    return "review/reviewList";
 	}
 	
 //	@PostMapping("/reviewRegister")
@@ -62,6 +70,7 @@ public class ReviewController {
 	
 	/*20250523 리뷰목록 페이지에서 리뷰작성페이지로*/
 	@GetMapping("/reviewRegister")
+	@PreAuthorize("isAuthenticated()")
 	public String showReviewForm(Model model) {
 	    // 필요시 model.addAttribute()로 초기 데이터 전달
 	    return "review/reviewRegister";  // JSP 경로
@@ -70,6 +79,7 @@ public class ReviewController {
 	
 	/*공연 상세페이지에서 값을 넘겨받아 리뷰 작성페이지로*/
 	@PostMapping("/reviewRegister")
+	@PreAuthorize("isAuthenticated()")
 	public String reviewRegister(
 	    @RequestParam("imgKey") String imgKey,
 	    @RequestParam("title") String title,
@@ -98,7 +108,7 @@ public class ReviewController {
 	}
 	
 	@PostMapping("submitReview")
-	public String submitReview(ReviewVO review, RedirectAttributes rttr) {
+	public String submitReview(ReviewVO review, RedirectAttributes rttr, Principal principal) {
 		Date now = new Date();
 		review.setRegDate(now);
 		review.setUpdateDate(now);
@@ -120,11 +130,15 @@ public class ReviewController {
 		model.addAttribute("cri", cri);
 	}
 	
+	@PreAuthorize("principal.username==#writer")
 	@PostMapping("/reviewRemove")
-	public String remove(Long bno, Criteria cri, RedirectAttributes rttr) {
+	public String remove(Long bno, Criteria cri, RedirectAttributes rttr,
+						String writer) {
 		log.info("remove...");
 		
 		service.remove(bno);
+		
+		rttr.addFlashAttribute("result", "삭제 성공했습니다.");
 		
 		rttr.addAttribute("pageNum", cri.getPageNum());
 	    rttr.addAttribute("amount", cri.getAmount());
@@ -134,11 +148,14 @@ public class ReviewController {
 		return "redirect:/review/reviewList";
 	}
 	
+	@PreAuthorize("principal.username==#vo.writer")
 	@PostMapping("/reviewModify")
 	public String modify(ReviewVO vo, Criteria cri, RedirectAttributes rttr) {
 		log.info("modify...");
 		
 		service.modifiy(vo);
+		
+		rttr.addFlashAttribute("result", "수정 성공했습니다.");
 		
 		rttr.addAttribute("pageNum", cri.getPageNum());
 	    rttr.addAttribute("amount", cri.getAmount());

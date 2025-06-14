@@ -110,4 +110,25 @@
   	
   </select>
   
+  <select id="getListWithPagingByImgKey" resultType="com.project.domain.ReviewVO">
+  <![CDATA[
+    SELECT bno, img_url AS img, title, writer, readcount AS readCount, regdate, updatedate, content
+    FROM (
+      SELECT ROWNUM rn, bno, img_url, title, writer, readcount, regdate, updatedate, content
+      FROM (
+        SELECT * FROM tbl_performance
+        WHERE img_key = #{imgKey}
+        ORDER BY bno DESC
+      )
+      WHERE ROWNUM <= #{cri.pageNum} * #{cri.amount}
+    )
+    WHERE rn > (#{cri.pageNum} - 1) * #{cri.amount}
+  ]]>
+</select>
+
+<select id="getTotalCountByImgKey" resultType="int">
+  SELECT COUNT(*) FROM tbl_performance
+  WHERE img_key = #{imgKey}
+</select>
+  
 </mapper>

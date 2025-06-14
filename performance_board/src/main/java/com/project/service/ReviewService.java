@@ -30,4 +30,8 @@ public interface ReviewService {
 	
 	// 총 개수
 	public int getTotal(Criteria cri);
+
+	public List<ReviewVO> getListByImgKey(Criteria cri, String imgKey);
+
+	public int getTotalByImgKey(String imgKey);
 }

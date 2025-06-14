@@ -34,6 +34,11 @@
                             </div>
                             <div class="performanceDetail-info">
                                 <div class="title"><c:out value="${performance.eventName}" /></div>
+                            	<div class="reviewLink">
+	                            	<a href="${pageContext.request.contextPath}/review/reviewList?imgKey=${performance.imgKey}">
+	        						리뷰 보기
+	    							</a>
+                            	</div>
                                 <table class="performanceDetail-table">
                                     <tbody>
                                         <tr>
@@ -84,6 +89,7 @@
 								        <input type="hidden" name="img" value="${performance.image}" />
 								        <input type="hidden" name="category" value="${performance.category}" />
    										<input type="hidden" name="place" value="${performance.place}" />
+   										<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								        <button type="submit" class="btn btn-default">리뷰 작성</button>
 								    	</form>
                                 </div>

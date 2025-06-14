@@ -38,4 +38,8 @@ public interface ReviewMapper {
 	// 총 개수
 	public int getTotalCount(Criteria cri);
 
+	public List<ReviewVO> getListWithPagingByImgKey(@Param("cri") Criteria cri, @Param("imgKey") String imgKey);
+
+	public int getTotalCountByImgKey(@Param("imgKey") String imgKey);
+
 }

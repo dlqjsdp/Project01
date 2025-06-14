@@ -12,6 +12,7 @@
 
 <!-- 검색창 -->
 <form action="/review/reviewList" method="get" class="search-container">
+<input type="hidden" name="imgKey" value="${imgKey}" />
   <div class="search-top-box">
     <div class="sch-form-wrap flex-inline">
       <div class="input-group">
@@ -39,6 +40,12 @@
   </div>
 </form>
 <!-- //검색창 -->
+
+<c:if test="${not empty imgKey}">
+  <div style="max-width: 1200px; margin: 20px auto 20px auto; text-align: left;">
+    <h3>이 공연의 리뷰 목록</h3>
+  </div>
+</c:if>
 
   	<!--20250523리뷰 작성 버튼 추가-->
     	<div class="review-register-button" style="max-width: 1200px; margin: 20px auto 0 auto; text-align: right;">
@@ -79,7 +86,8 @@
 		        &pageNum=${pageMaker.cri.pageNum}
 				&amount=${pageMaker.cri.amount}
 				&type=${pageMaker.cri.type}
-				&keyword=${pageMaker.cri.keyword}">
+				&keyword=${pageMaker.cri.keyword}
+				&imgKey=${imgKey}">
 		          <c:out value="${review.title}" />
 		        </a>
 	      	</td>
@@ -123,6 +131,9 @@
   <input type="hidden" name="amount" value="${pageMaker.cri.amount}" />
   <input type="hidden" name="type" value="${pageMaker.cri.type}" />
   <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}" />
+    <c:if test="${not empty imgKey}">
+    <input type="hidden" name="imgKey" value="${imgKey}" />
+  </c:if>
 </form>
 
 <%@ include file="../includes/footer.jsp" %>

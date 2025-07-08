@@ -1,14 +1,26 @@
-SELECT * FROM performance WHERE place LIKE '%세종%';
+-- tbl_performance 생성
+create SEQUENCE seq_performance;
 
-SELECT * FROM performance
-WHERE eventname LIKE '%앙상블%'
-   OR place LIKE '%세종%'
-   OR category LIKE '%클래식%'
-AND ROWNUM < 10;
+create table tbl_performance(
+    bno number(10,0),
+    img_url varchar2(500) not null, 
+    title varchar2(200) not null,
+    writer varchar2(50) not null,
+    readcount number(4) default 0,      -- 조회수
+    regdate date default sysdate,       -- 작성일
+    updatedate date default sysdate,     -- 수정일
+    content varchar2(1000)
+    IMGKEY   VARCHAR2(100),
+    CATEGORY VARCHAR2(50),
+    PLACE    VARCHAR2(100)
+);
 
-select * from tbl_performance;
+alter table tbl_performance add CONSTRAINT pk_performance
+primary key(bno);
 
-SELECT * FROM tbl_performance ORDER BY bno DESC;
+desc tbl_performance;
+
+SET DEFINE OFF;
 
 insert into tbl_performance(bno, img_url, title, writer, content)
 values(
@@ -284,7 +296,17 @@ VALUES (
 '
 );
 
-SET DEFINE ON;
-
 commit;
+
+select * from tbl_performance order by BNO;
+
+-- replyCnt 추가
+alter table tbl_performance
+add (replyCnt number default 0);
+
+-- 장소, 분류 추가
+alter table tbl_performance
+add (img_key VARCHAR2(255), place VARCHAR2(300), category VARCHAR2(100));
+
+
 
